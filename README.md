@@ -1,1 +1,2 @@
-# summer2024_csds393_group2
+# gitCraft
+## Summer 2024 CSDS393 Group 2 project
