@@ -7,6 +7,7 @@ var cors = require("cors");
 
 const swaggerSpec = require("./utilities/swagger");
 const userRoute = require("./routes/user-route");
+const postRoute = require("./routes/post-route");
 const { verifyJwtToken } = require("./utilities/jwt-auth");
 const { mongodbConnection } = require("./utilities/mongo-config");
 
@@ -22,6 +23,7 @@ app.use(express.json());
 
 try {
   app.use("/user", userRoute);
+  app.use("/post", verifyJwtToken, postRoute);
 } catch (error) {
   res.status(400).json({
     message: error.message,
