@@ -208,8 +208,10 @@ const {
   onlyJson,
 } = require("../utilities/utils");
 const { sendEmail } = require("../utilities/mail");
+const { generateJwtToken, verifyJwtToken } = require("../utilities/jwt-auth");
 const {
   createUser,
+  updateUser,
   userLogin,
   markOTP,
   verifyUser,
@@ -223,6 +225,12 @@ router.post("/", function (req, res) {
     .then((record) => {
       createUser(record)
         .then(async (data) => {
+          let otp = await generateOTP();
+
+          markOTP({ ...record, otp });
+
+          sendEmail({ ...record, otp, type: "signup" });
+
           res.status(200).json({
             message: "User was created Successfully",
             data: filterOut({ object: data, type: "key", from: "password" }),
@@ -241,6 +249,40 @@ router.post("/", function (req, res) {
         error: "input validation failed",
       });
     });
+});
+
+router.put("/", verifyJwtToken, function (req, res) {
+  let id = req.id;
+  let requestBody = req.body;
+  if (id && requestBody) {
+    validate({ ...requestBody, id, action: "editUser" })
+      .then(async (record) => {
+        let result = await updateUser(
+          id,
+          filterOut({ object: record, type: "key", from: "id" })
+        );
+        let token = await generateJwtToken({
+          email: result.email,
+          name: result.name,
+          id: result._id,
+        });
+        res.status(200).json({
+          message: "Users updated Successfully",
+          data: filterOut({ object: result, type: "key", from: "password" }),
+          token,
+        });
+      })
+      .catch((customError) => {
+        res.status(403).json({
+          message: customError,
+          error: "input validation failed",
+        });
+      });
+  } else {
+    res.status(403).json({
+      message: "id param or request body is missing",
+    });
+  }
 });
 
 router.post("/otp", function (req, res) {
@@ -300,7 +342,12 @@ router.post("/login", function (req, res) {
     .then((record) => {
       userLogin(record)
         .then(async (data) => {
-                  res.status(200).json({
+          let token = await generateJwtToken({
+            email: data.email,
+            name: data.name,
+            id: data._id,
+          });
+          res.status(200).json({
             message: "User logged in Successfully",
             data: filterOut({ object: data, type: "key", from: "password" }),
             token,
@@ -317,6 +364,23 @@ router.post("/login", function (req, res) {
       res.status(403).json({
         message: customError,
         error: "input validation failed",
+      });
+    });
+});
+
+router.post("/logout", verifyJwtToken, function (req, res) {
+  let token = req.headers["x-access-token"];
+  let uid = req.id;
+  logout({ token, uid })
+    .then(async (data) => {
+      res.status(200).json({
+        message: "User logged out Successfully",
+      });
+    })
+    .catch((error) => {
+      res.status(403).json({
+        message: error?.message,
+        error: "User logout failed",
       });
     });
 });

@@ -176,7 +176,6 @@ function verifyUser({ email, otp }) {
   });
 }
 
-
 async function updateUser(key, params, type) {
   let find = {};
   if (type === "email") {
