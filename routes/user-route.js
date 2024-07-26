@@ -208,7 +208,6 @@ const {
   onlyJson,
 } = require("../utilities/utils");
 const { sendEmail } = require("../utilities/mail");
-// const { generateJwtToken, verifyJwtToken } = require("../utilities/jwt-auth");
 const {
   createUser,
   userLogin,

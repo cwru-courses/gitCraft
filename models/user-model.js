@@ -3,8 +3,10 @@ const bcrypt = require("bcryptjs");
 const fs = require("fs");
 
 const path = require("path");
+let otpJsonPath = path.join(__dirname, "/..", "/otp.json");
 
 const { minDiffFromNow } = require("../utilities/utils");
+const { emailRegex, userStatus } = require("../utilities/constants");
 
 Schema = mongoose.Schema;
 ObjectId = Schema.ObjectId;
@@ -76,6 +78,15 @@ async function createUser({ name, password, email }) {
   });
 }
 
+function getUser({ email }) {
+  return new Promise((resolve, reject) => {
+    resolve(userModel.find({ email: email }).exec());
+  });
+}
+
+function forgotUser({ email }) {
+  return updateUser(email, { status: userStatus[1] }, "email");
+}
 
 function userLogin({ email, password }) {
   return new Promise(function (resolve, reject) {
@@ -111,6 +122,32 @@ function fsRead(cb) {
   });
 }
 
+function markOTP({ email, otp }) {
+  fsRead((res) => {
+    res[email] = {
+      otp: otp,
+      sent: new Date().toISOString(),
+    };
+
+    fs.writeFile(otpJsonPath, JSON.stringify(res), "utf-8", (e) =>
+      console.error(e)
+    );
+  });
+}
+
+function verifyOTP(email, otp, cb) {
+  fsRead((res) => {
+    let otpData = res[email];
+
+    if (minDiffFromNow(new Date(otpData["sent"])) <= 10) {
+      if (otp === otpData["otp"]) {
+        return cb({ status: 200 });
+      }
+      return cb({ status: 403, message: "otp not matched" });
+    }
+    return cb({ status: 403, message: "time exceeded" });
+  });
+}
 
 function verifyUser({ email, otp }) {
   return new Promise(function (resolve, reject) {
@@ -139,8 +176,40 @@ function verifyUser({ email, otp }) {
   });
 }
 
+
+async function updateUser(key, params, type) {
+  let find = {};
+  if (type === "email") {
+    find["email"] = key;
+  } else {
+    find["_id"] = new mongoose.Types.ObjectId(key);
+  }
+  if (params["password"]) {
+    params["password"] = await hashPassword({ password: params["password"] });
+  }
+  return userModel.findOneAndUpdate(
+    find,
+    { $set: params },
+    { new: true, runValidators: true }
+  );
+}
+
+function deleteUser({ id }) {
+  return new Promise((resolve, reject) => {
+    resolve(
+      userModel
+        .findOneAndDelete({ _id: new mongoose.Types.ObjectId(id) })
+        .exec()
+    );
+  });
+}
+
 module.exports = {
   createUser,
+  markOTP,
+  forgotUser,
   verifyUser,
   userLogin,
+  updateUser,
+  deleteUser,
 };
