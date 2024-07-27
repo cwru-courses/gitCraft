@@ -1,0 +1,35 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>Verify Account</mat-card-title>
+    <mat-card-content>
+      <mat-dialog-content>
+        <p>Please enter the received OTP on the mail ﹡﹡﹡</p>
+        <mat-form-field appearance="outline">
+          <mat-label>Enter your otp</mat-label>
+          <input
+            matInput
+            placeholder="y!_F_9"
+            [formControl]="otp"
+            (blur)="updateErrorMessage()"
+            required
+          />
+          <mat-icon matSuffix>timer</mat-icon>
+          @if (otp.invalid) {
+          <mat-error>{{ errorMessageOtp() }}</mat-error
+          >}
+        </mat-form-field>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Close</button>
+        <button
+          mat-button
+          [disabled]="otpBtnDis()"
+          (click)="request()"
+          cdkFocusInitial
+        >
+          <mat-icon>encrypted_add</mat-icon>&nbsp;Verify
+        </button>
+      </mat-dialog-actions>
+    </mat-card-content>
+  </mat-card>
+</div>

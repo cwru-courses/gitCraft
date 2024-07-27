@@ -1,0 +1,149 @@
+/* General Container */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(
+    95deg,
+    #3f51b5,
+    #2196f3
+  ); /* Same as pagenotfound */
+  color: white; /* Text color from pagenotfound */
+}
+
+/* Card Styling */
+mat-card {
+  width: 500px;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+mat-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+mat-card-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #3f51b5;
+}
+
+.login-mat-icon {
+  margin-right: 10px;
+  color: #3f51b5;
+}
+
+mat-icon {
+  color: #3f51b5;
+}
+
+/* Form Field Styling */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+mat-form-field.mat-form-field-outline .mat-form-field-outline {
+  color: #3f51b5; /* Outline color */
+}
+
+mat-form-field.mat-focused .mat-form-field-outline,
+mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: #3f51b5; /* Focus color */
+}
+
+mat-label {
+  font-size: 14px;
+  color: #3f51b5;
+}
+
+/* Input Styling */
+input.mat-input-element {
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+input.mat-input-element:focus {
+  outline: none;
+  border-color: #3f51b5;
+  box-shadow: 0 0 5px rgba(63, 81, 181, 0.5);
+}
+
+/* Password Toggle Button */
+.password-toggle-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.password-toggle-button mat-icon {
+  font-size: 20px;
+  color: #3f51b5;
+}
+
+/* Button Styling */
+button[mat-raised-button].login-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #3f51b5;
+  color: white;
+  border-radius: 10px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+button[mat-raised-button].login-button:hover {
+  background-color: #303f9f;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+button[mat-raised-button].login-button[disabled] {
+  background-color: #e0e0e0;
+  color: #9e9e9e;
+  border-radius: 10px;
+}
+
+/* Error Message Styling */
+mat-error {
+  color: #e53935;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+/* Additional Options */
+.additional-options {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+button.forgot-password,
+button.sign-up {
+  font-size: 14px;
+  color: #3f51b5;
+  text-transform: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+button.forgot-password:hover,
+button.sign-up:hover {
+  text-decoration: underline;
+  color: #303f9f;
+}

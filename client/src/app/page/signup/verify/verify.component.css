@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  /* width: 550px; */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+  font-size: 24px;
+  color: #268497;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+mat-form-field mat-label {
+  font-size: 14px;
+  color: #268497;
+}
+
+mat-icon {
+  color: #268497;
+}
+
+mat-error {
+  color: #e53935;
+  font-size: 12px;
+}
