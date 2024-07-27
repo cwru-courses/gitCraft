@@ -1,1 +1,54 @@
-<p>home works!</p>
+<mat-stepper class="stepper">
+  <mat-step label="Community">
+    <ng-template matStepLabel>
+      <p>Community</p>
+    </ng-template>
+  </mat-step>
+
+  <mat-step label="My_Public">
+    <ng-template matStepLabel>
+      <p>My Public</p>
+    </ng-template></mat-step
+  >
+  <mat-step label="My_Private">
+    <ng-template matStepLabel>
+      <p>My Private</p>
+    </ng-template></mat-step
+  >
+</mat-stepper>
+
+<button
+  mat-fab
+  extended
+  [matMenuTriggerFor]="menu"
+  aria-label="Speed Dial"
+  class="speed-dial-button"
+  [matTooltip]="'Count of '"
+>
+  <mat-icon>menu</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu" class="speed-dial-menu">
+  <button mat-menu-item>
+    <mat-icon>post_add</mat-icon>
+    <span>Create</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>lock_reset</mat-icon>
+    <span>New Password</span>
+  </button>
+</mat-menu>
+
+<div class="fab-container">
+  <mat-card class="fab-card">
+    <div class="avatar-container">
+      <img [src]="avatarUrl" alt="User Avatar" class="avatar" />
+    </div>
+    <mat-card-title>Sample User</mat-card-title>
+    <span class="user-info">
+      <button mat-icon-button>
+        <mat-icon>logout</mat-icon>
+      </button>
+    </span>
+  </mat-card>
+</div>

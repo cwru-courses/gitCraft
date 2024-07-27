@@ -1,0 +1,152 @@
+/* Stepper Styles */
+.stepper {
+  margin: 16px;
+}
+
+.mat-stepper-header {
+  background: linear-gradient(135deg, #3f51b5, #2196f3);
+  color: white;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.mat-step-label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.mat-step-icon {
+  color: #1976d2;
+}
+
+.mat-step-header-active .mat-step-icon {
+  color: #1976d2;
+}
+
+.mat-step-header-completed .mat-step-icon {
+  color: #4caf50;
+}
+
+/* Grid Component Styles */
+app-grid {
+  margin: 16px;
+}
+
+/* Speed Dial Button Styles */
+.speed-dial-button {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  background-color: #1976d2;
+  color: #fff;
+  z-index: 1000;
+}
+
+.speed-dial-button mat-icon {
+  margin-right: 8px;
+}
+
+.speed-dial-button:hover {
+  background-color: #155a9e;
+}
+
+/* Speed Dial Menu Styles */
+.speed-dial-menu {
+  min-width: 200px;
+}
+
+.mat-menu-item {
+  display: flex;
+  align-items: center;
+}
+
+.mat-menu-item mat-icon {
+  margin-right: 8px;
+}
+
+.mat-menu-item span {
+  font-size: 0.875rem;
+}
+
+/* FAB Container Styles */
+.fab-container {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.fab-card {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  width: 200px; /* Adjust width as needed */
+}
+
+.avatar-container {
+  margin-right: 8px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #e0e0e0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.fab-card-title {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.fab-card button {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.fab-card button mat-icon {
+  font-size: 24px;
+}
+
+/* Speed Dial Menu Styles */
+.speed-dial-menu {
+  min-width: 200px;
+}
+
+.mat-menu-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px; /* Adjust padding for more space */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.mat-menu-item mat-icon {
+  margin-right: 8px;
+  color: #1976d2; /* Icon color */
+}
+
+.mat-menu-item span {
+  font-size: 0.875rem;
+  color: #333; /* Text color */
+}
+
+/* Hover effect for menu items */
+.mat-menu-item:hover {
+  background-color: #f0f0f0; /* Background color on hover */
+}
+
+.mat-menu-item:hover mat-icon,
+.mat-menu-item:hover span {
+  color: #1976d2; /* Change icon and text color on hover */
+}
