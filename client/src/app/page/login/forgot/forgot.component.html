@@ -1,0 +1,35 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>Forgot Password</mat-card-title>
+    <mat-card-content>
+      <mat-dialog-content>
+        <p>You will receive an OTP on the mail, use that for login ﹡﹡﹡</p>
+        <mat-form-field appearance="outline">
+          <mat-label>Enter your email</mat-label>
+          <input
+            matInput
+            placeholder="pat@example.com"
+            [formControl]="email"
+            (blur)="updateErrorMessage()"
+            required
+          />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          @if (email.invalid) {
+          <mat-error>{{ errorMessageEmail() }}</mat-error
+          >}
+        </mat-form-field>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Close</button>
+        <button
+          mat-button
+          [disabled]="otpBtnDis()"
+          (click)="request()"
+          cdkFocusInitial
+        >
+          <mat-icon>lock_reset</mat-icon>&nbsp;Send
+        </button>
+      </mat-dialog-actions>
+    </mat-card-content>
+  </mat-card>
+</div>

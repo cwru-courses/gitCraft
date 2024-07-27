@@ -1,0 +1,11 @@
+<body>
+  @if(appService.loading){
+  <div class="wrapper">
+    <div class="inner">
+      <mat-spinner class="mat-spinner-color"></mat-spinner>
+    </div>
+  </div>
+  }
+
+  <router-outlet />
+</body>

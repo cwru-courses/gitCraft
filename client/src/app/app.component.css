@@ -1,0 +1,58 @@
+.wrapper {
+  display: flex;
+  background: #d8d8d899;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(110vh - 100px);
+  z-index: 1500;
+}
+.inner {
+  padding: 12px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.page-left {
+  margin-left: 2%;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.page-right {
+  margin-right: 2%;
+  color: #fff;
+  opacity: 0.8;
+}
+
+mat-form-field {
+  margin-right: 12px;
+}
+
+.app-toolbar {
+  position: sticky;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+  background-color: linear-gradient(240deg, #b43995da, #3c3cc7da);
+}
+
+.highlight:hover {
+  opacity: 0.8;
+  background-color: #253694;
+  color: #fff;
+}
+
+.highlight {
+  border-radius: 30px;
+}
+
+.mat-spinner-color::ng-deep circle {
+  stroke: #7b96d1 !important;
+}
+
