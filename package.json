@@ -4,7 +4,7 @@
   "description": "A central location for handmade crafters to gather, to share and inspire others, and to be creative with other projects as a springboard",
   "main": "index.js",
   "scripts": {
-  "start": "cd client && npm install && npm run build --prod && cd .. && npm install",
+  "start": "cd client && npm install && npm run build --prod && cd .. && npm install && node app.js",
     "dev": "nodemon app.js",
     "test": "mocha --timeout 10000"
   },
