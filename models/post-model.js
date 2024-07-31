@@ -1,4 +1,8 @@
 const mongoose = require("mongoose");
+const fs = require("fs");
+const { promisify } = require("util");
+
+const unlinkAsync = promisify(fs.unlink);
 
 const { postStatus } = require("../utilities/constants");
 
@@ -79,4 +83,45 @@ function getPost({ id, uid, status }) {
   });
 }
 
-module.exports = { createPost, getPost };
+function updatePost(id, uid, requestBody) {
+  getPost({ id, uid })
+    .then((data) => {
+      if (data.length === 0) {
+        reject({ message: `post ${id} was not created by you` });
+      }
+      if (requestBody["image"]) {
+        deleteFile(data[0].image);
+      }
+      requestBody["modified"] = Date.now();
+      return postModel.findOneAndUpdate(
+        { _id: new mongoose.Types.ObjectId(id) },
+        { $set: requestBody },
+        { new: true, runValidators: true }
+      );
+    })
+    .catch((err) => reject(err));
+}
+
+async function deleteFile(path) {
+  await unlinkAsync(path);
+}
+
+function deletePost({ id, uid }) {
+  return new Promise(function (resolve, reject) {
+    getPost({ id, uid })
+      .then(async (data) => {
+        if (data.length > 0) {
+          deleteFile(data[0].image);
+          resolve(
+            postModel
+              .findOneAndDelete({ _id: new mongoose.Types.ObjectId(id) })
+              .exec()
+          );
+        }
+        reject({ message: `post ${id} was not created by you` });
+      })
+      .catch((err) => reject(err));
+  });
+}
+
+module.exports = { createPost, getPost, updatePost, deletePost };
