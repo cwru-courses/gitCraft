@@ -208,7 +208,7 @@ const {
   onlyJson,
 } = require("../utilities/utils");
 const { sendEmail } = require("../utilities/mail");
-const { generateJwtToken, verifyJwtToken } = require("../utilities/jwt-auth");
+const { generateJwtToken, verifyJwtToken } = require("../middlewares/jwt-auth");
 const {
   createUser,
   updateUser,
@@ -216,8 +216,8 @@ const {
   markOTP,
   verifyUser,
   forgotUser,
-} = require("../models/user-model");
-const { logout } = require("../models/blacklist-model");
+} = require("../controllers/user-controller");
+const { logout } = require("../controllers/blacklist-controller");
 
 router.post("/", function (req, res) {
   let requestBody = req.body;
@@ -314,13 +314,11 @@ router.post("/forgot", function (req, res) {
   let requestBody = req.body;
   validate({ ...requestBody, action: "forgot" })
     .then(async (record) => {
-      let result = await forgotUser(record);
+      let otp = await generateOTP(true);
+
+      let result = await forgotUser({ ...record, otp });
 
       result = onlyJson(result);
-
-      let otp = await generateOTP();
-
-      markOTP({ ...result, otp });
 
       sendEmail({ ...result, otp, type: "forgot" });
 
