@@ -20,4 +20,27 @@ export class AppService {
       horizontalPosition: 'left',
     });
   }
+
+  setState(tok: string, uname: string, umail: string, uid: string) {
+    localStorage.setItem('username', uname);
+    localStorage.setItem('email', umail);
+    localStorage.setItem('uid', uid);
+    localStorage.setItem('token', tok);
+  }
+
+  isAuth() {
+    let username = localStorage.getItem('username');
+    let email = localStorage.getItem('email');
+    let uid = localStorage.getItem('uid');
+    let token = localStorage.getItem('token');
+
+    if (username && email && uid && token) {
+      return { username, email, uid, token }
+    }
+    return null;
+  }
+
+  resetState() {
+    localStorage.clear();
+  }
 }

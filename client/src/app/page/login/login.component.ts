@@ -37,6 +37,14 @@ export class LoginComponent {
   errorMessagePassword = signal('');
   userObject: any = null
   constructor(private loginService: LoginService, public appService: AppService, private router: Router) {
+    appService.loading = true;
+    this.userObject = appService.isAuth()
+    if (this.userObject !== null && this.userObject.uid && this.userObject.token) {
+      router.navigate(['home'])
+    }
+    appService.loading = false;
+
+
     merge(this.email.statusChanges, this.email.valueChanges, this.password.statusChanges, this.password.valueChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.updateErrorMessage());
@@ -81,6 +89,7 @@ export class LoginComponent {
     })).subscribe((config: any) => {
       if (config) {
         this.appService.openSnackBar(config.message, '✅');
+        this.appService.setState(config.token, config.data.name, config.data.email, config.data._id);
         this.router.navigate(['home'], {
           queryParams: { view: 'global' }
         })

@@ -3,12 +3,6 @@
   margin: 16px;
 }
 
-.mat-stepper-header {
-  background: linear-gradient(135deg, #3f51b5, #2196f3);
-  color: white;
-  border-bottom: 1px solid #e0e0e0;
-}
-
 .mat-step-label {
   font-size: 1rem;
   font-weight: bold;

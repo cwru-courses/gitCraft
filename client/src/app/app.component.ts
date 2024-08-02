@@ -19,4 +19,5 @@ export class AppComponent {
 
   constructor(public appService: AppService) { }
 
+  logout() { }
 }

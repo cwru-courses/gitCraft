@@ -1,21 +1,23 @@
 <mat-stepper class="stepper">
   <mat-step label="Community">
     <ng-template matStepLabel>
-      <p>Community</p>
+      <p (click)="find(1)">Community</p>
     </ng-template>
   </mat-step>
 
   <mat-step label="My_Public">
     <ng-template matStepLabel>
-      <p>My Public</p>
+      <p (click)="find(2)">My Public</p>
     </ng-template></mat-step
   >
   <mat-step label="My_Private">
     <ng-template matStepLabel>
-      <p>My Private</p>
+      <p (click)="find(3)">My Private</p>
     </ng-template></mat-step
   >
 </mat-stepper>
+
+<app-grid [posts]="posts"></app-grid>
 
 <button
   mat-fab
@@ -23,17 +25,17 @@
   [matMenuTriggerFor]="menu"
   aria-label="Speed Dial"
   class="speed-dial-button"
-  [matTooltip]="'Count of '"
+  [matTooltip]="'Count of ' + page"
 >
-  <mat-icon>menu</mat-icon>
+  <mat-icon>menu</mat-icon>{{ count }}
 </button>
 
 <mat-menu #menu="matMenu" class="speed-dial-menu">
-  <button mat-menu-item>
+  <button mat-menu-item (click)="modal()">
     <mat-icon>post_add</mat-icon>
     <span>Create</span>
   </button>
-  <button mat-menu-item>
+  <button mat-menu-item (click)="change()">
     <mat-icon>lock_reset</mat-icon>
     <span>New Password</span>
   </button>
@@ -44,9 +46,9 @@
     <div class="avatar-container">
       <img [src]="avatarUrl" alt="User Avatar" class="avatar" />
     </div>
-    <mat-card-title>Sample User</mat-card-title>
+    <mat-card-title>{{ userName }}</mat-card-title>
     <span class="user-info">
-      <button mat-icon-button>
+      <button mat-icon-button (click)="logout()">
         <mat-icon>logout</mat-icon>
       </button>
     </span>

@@ -39,6 +39,12 @@ export class SignupComponent {
   errorMessagePassword = signal('');
   userObject: any = null
   constructor(private signupService: SignupService, public appService: AppService, private router: Router) {
+    appService.loading = true;
+    this.userObject = appService.isAuth()
+    if (this.userObject !== null && this.userObject.uid && this.userObject.token) {
+      router.navigate(['home'])
+    }
+    appService.loading = false;
     merge(this.name.statusChanges, this.name.valueChanges, this.email.statusChanges, this.email.valueChanges, this.password.statusChanges, this.password.valueChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.updateErrorMessage());

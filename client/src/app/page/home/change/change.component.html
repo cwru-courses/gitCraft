@@ -1,0 +1,44 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>Change Password</mat-card-title>
+    <mat-card-content>
+      <mat-dialog-content>
+        <p>Change the Password ﹡﹡﹡</p>
+        <mat-form-field appearance="outline">
+          <mat-label>Enter your password</mat-label>
+          <input
+            matInput
+            [formControl]="password"
+            required
+            (blur)="updateErrorMessage()"
+            [type]="hide() ? 'password' : 'text'"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="clickEvent($event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide()"
+            class="password-toggle-button"
+          >
+            <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+          @if (password.invalid) {
+          <mat-error>{{ errorMessagePassword() }}</mat-error>
+          }
+        </mat-form-field>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Close</button>
+        <button
+          mat-button
+          [disabled]="pwdBtnDis()"
+          (click)="request()"
+          cdkFocusInitial
+        >
+          <mat-icon>lock_reset</mat-icon>&nbsp;Send
+        </button>
+      </mat-dialog-actions>
+    </mat-card-content>
+  </mat-card>
+</div>

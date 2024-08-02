@@ -1,0 +1,58 @@
+.container {
+  padding: 24px;
+  background: linear-gradient(260deg, #c2aecb, #5a82a2);
+  color: rgb(63, 74, 61);
+  border-bottom: 1px solid #e0e0e0;
+}
+
+img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.responsive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+.author {
+  font-size: 0.9rem;
+  color: #555; /* A subtle gray color for better readability */
+  font-style: italic; /* Italicized to distinguish from other text */
+  margin-top: 5px; /* Space above the author text */
+  display: flex;
+  justify-content: start; /* Center the author text */
+}
+
+.spacer {
+  display: flex;
+  justify-content: space-between; /* Space items between edges */
+  align-items: center;
+  padding: 8px 16px; /* Adjust padding as needed */
+}
+
+.left-section,
+.right-section {
+  display: flex; /* Optional: if there are multiple items within these sections */
+  align-items: center;
+}
+
+.mat-chip {
+  background-color: #e0e0e0; /* Default chip background */
+  color: #333;
+  font-size: 14px; /* Adjust font size */
+  border-radius: 16px; /* Rounded edges */
+  padding: 8px;
+}
+
+.mat-chip:disabled {
+  background-color: #b0bec5; /* Lighter color for disabled chip */
+  color: #757575; /* Disabled text color */
+}
+
+.mat-card-actions {
+  padding: 16px;
+  border-top: 1px solid #ddd;
+}

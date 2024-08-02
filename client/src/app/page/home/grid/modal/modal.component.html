@@ -1,0 +1,113 @@
+<div class="container">
+  <mat-card class="custom-card">
+    <mat-card-title
+      >{{ actionTitle | capitalise }} Post&nbsp;<mat-icon>post_add</mat-icon>
+      @if(owner){
+      <small class="info-view info-{{ post.status }}"
+        >In my {{ post.status }} view</small
+      >
+      }
+    </mat-card-title>
+    <mat-card-content>
+      <div class="row">
+        <div class="col photo" (click)="fileInput.click()">
+          <input
+            type="file"
+            #fileInput
+            (change)="onFileSelected($event)"
+            [disabled]="isDisabled"
+            style="display: none"
+          />
+          <img [src]="photoUrl" alt="Image" />
+        </div>
+        <div class="col title">
+          <mat-form-field appearance="fill">
+            <mat-label>Title</mat-label>
+            <input
+              matInput
+              placeholder="Chicken Tikka Masala"
+              [formControl]="title"
+              (blur)="updateErrorMessage()"
+              [readonly]="isDisabled"
+              required
+            />
+            <mat-icon matSuffix>title</mat-icon>
+            @if (title.invalid) {
+            <mat-error>{{ errorMessageTitle() }}</mat-error
+            >}
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col description">
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea
+              matInput
+              placeholder="Recepie to make chicken tikka masalas"
+              [formControl]="description"
+              (blur)="updateErrorMessage()"
+              [readonly]="isDisabled"
+              required
+            ></textarea>
+            <mat-icon matSuffix>description</mat-icon>
+            @if (description.invalid) {
+            <mat-error>{{ errorMessageDescription() }}</mat-error
+            >}
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-dialog-actions class="dialog-actions">
+        <button mat-button (click)="onNoClick()">Close</button>
+        @if (btnEditForkEnabled) { @if(owner){
+        <button
+          mat-button
+          class="editable-btn"
+          (click)="onEditForkAction(true)"
+        >
+          <mat-icon>edit_note</mat-icon> Edit
+        </button>
+        } @else {
+        <button
+          mat-button
+          class="editable-btn"
+          (click)="onEditForkAction(false)"
+        >
+          <mat-icon>fork_right</mat-icon> Fork
+        </button>
+        }}@else {
+        <button
+          class="draft-btn"
+          mat-button
+          [disabled]="actionBtnDis()"
+          (click)="request(true)"
+          cdkFocusInitial
+        >
+          <mat-icon>drafts</mat-icon>&nbsp;Draft
+        </button>
+        <button
+          class="edit-btn"
+          mat-button
+          [disabled]="actionBtnDis()"
+          (click)="request(false)"
+          cdkFocusInitial
+        >
+          <mat-icon>save</mat-icon>&nbsp;@if (owner) { Save } @else { Post }
+        </button>
+        @if(owner){
+        <button
+          class="delete-btn"
+          mat-button
+          [disabled]="actionBtnDis()"
+          (click)="deletePost()"
+          cdkFocusInitial
+        >
+          <mat-icon>delete</mat-icon>&nbsp;Delete
+        </button>
+        } }
+      </mat-dialog-actions>
+    </mat-card-footer>
+  </mat-card>
+</div>

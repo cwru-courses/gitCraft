@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #3f51b5, #2196f3);
+  color: white;
+}
+
+mat-card {
+  text-align: center;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+mat-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+mat-card-title {
+  font-size: 80px;
+  margin-bottom: 20px;
+  color: #e91e63;
+  font-family: "Roboto", sans-serif;
+}
+
+mat-card-content p {
+  font-size: 20px;
+  margin-bottom: 30px;
+  color: #ff4081;
+  font-family: "Open Sans", sans-serif;
+}
+
+.home-button {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  padding: 10px 20px;
+  background: linear-gradient(200deg, #2196f3, #3f51b5);
+  border-radius: 10px;
+  color: white;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+
+  mat-icon {
+    margin-right: 10px;
+  }
+
+  &:hover {
+    background: linear-gradient(180deg, #3f51b5, #2196f3);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+}

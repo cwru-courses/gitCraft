@@ -1,0 +1,30 @@
+<div class="container responsive-grid">
+  @if (posts.length===0) {
+  <mat-card-content> No data to show 🙅 </mat-card-content>
+  } @else { @for (post of posts; track post._id; let i = $index) {
+  <mat-card (click)="modal(post)">
+    <mat-card-header>
+      <mat-card-title>{{ post.title | capitalise }} </mat-card-title>
+      <mat-card-subtitle class="author"
+        >Author: {{ post.author }}</mat-card-subtitle
+      >
+    </mat-card-header>
+    <br />
+    <img mat-card-image [src]="appService.BASE_URL + post.image" [loading]="" />
+    <mat-card-content>
+      <br />
+      <p>
+        {{ post.description | characters : 35 }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions class="spacer">
+      <div class="left-section">
+        <mat-chip>{{ i + 1 }}</mat-chip>
+      </div>
+      <div class="right-section">
+        <mat-chip disabled>{{ post.modified | date : "medium" }}</mat-chip>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+  } }
+</div>

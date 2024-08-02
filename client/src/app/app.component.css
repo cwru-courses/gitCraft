@@ -56,3 +56,11 @@ mat-form-field {
   stroke: #7b96d1 !important;
 }
 
+/* body {
+  margin: 0;
+  background: linear-gradient(120deg, #5b80b3da, #6b6b9fda);
+  // url("../assets/background.jpg") no-repeat center;
+  background-size: cover;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  height: fit-content;
+} */
