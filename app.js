@@ -8,7 +8,7 @@ var cors = require("cors");
 const swaggerSpec = require("./utilities/swagger");
 const userRoute = require("./routes/user-route");
 const postRoute = require("./routes/post-route");
-const { verifyJwtToken } = require("./utilities/jwt-auth");
+const { verifyJwtToken } = require("./middlewares/jwt-auth");
 const { mongodbConnection } = require("./utilities/mongo-config");
 
 const port = process.env.PORT || 8080;
@@ -17,17 +17,14 @@ mongodbConnection();
 
 const app = express();
 
-app.use(cors());
-
-app.use(
-  express.static(path.join(__dirname, "client/dist/git-craft-ng/browser"))
-);
-
-app.get("*", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "client/dist/git-craft-ng/browser/index.html")
-  );
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
 });
+
+app.use(cors());
 
 app.use(express.json());
 
@@ -43,6 +40,8 @@ try {
 
 // Serve Swagger documentation
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
+
+app.use(express.static("public"));
 
 app.get(express.static(path.join(__dirname, "../client/build")));
 
