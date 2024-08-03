@@ -95,6 +95,9 @@ input.mat-input-element:focus {
 
 /* Button Styling */
 button[mat-raised-button].login-button {
+  display: flex;
+  justify-content: center;
+  align-items:center;
   width: 100%;
   padding: 12px;
   font-size: 16px;
@@ -108,6 +111,10 @@ button[mat-raised-button].login-button {
 button[mat-raised-button].login-button:hover {
   background-color: #303f9f;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+button[mat-raised-button].login-button:enabled .login-mat-icon{
+  color: #fff;
 }
 
 button[mat-raised-button].login-button[disabled] {
@@ -129,6 +136,7 @@ mat-error {
   display: flex;
   justify-content: center;
   margin-top: 25px;
+  color:rgba(0, 0, 0, 0.2)
 }
 
 button.forgot-password,
