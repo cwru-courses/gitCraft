@@ -1,5 +1,5 @@
 var jwt = require("jsonwebtoken");
-const { findBlacklist } = require("../models/blacklist-model");
+const { findBlacklist } = require("../controllers/blacklist-controller");
 
 var generateJwtToken = ({ email, name, id }) => {
   var token = jwt.sign({ email, name, id }, process.env.JWT_SECRET, {

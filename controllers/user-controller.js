@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const fs = require("fs");
+const mongoose = require("mongoose");
 
 const path = require("path");
 let otpJsonPath = path.join(__dirname, "..", "otp.json");
